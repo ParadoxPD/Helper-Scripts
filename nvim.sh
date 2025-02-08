@@ -21,7 +21,7 @@ sudo apt install ripgrep
 # clipboard
 #
 
-sudo apt instal xclip
+sudo apt install xclip
 
 #  install nerdfont
 #

@@ -27,31 +27,32 @@ sudo apt install xclip
 #
 
 mkdir -p ~/Downloads/tmp
-
 cd ~/Downloads/tmp
 
 # install build dep
-
 sudo apt-get install ninja-build gettext cmake curl build-essential
 
+#Build
 git clone https://github.com/neovim/neovim
-
-# build
-#
 cd neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-
-echo "add /usr/local/nvim to PATH"
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/neovim" CMAKE_BUILD_TYPE=RelWithDebInfo
+make install
 
 # add my config
 #
 
 cd ..
-
 git clone https://github.com/ParadoxPD/neovim-config.git
 
 rm -rf ~/.config/nvim
+mkdir -p ~/.config/
 
-mkdir -p ~/.config/nvim
-mv -v ~/Downloads/tmp/neovim-config/.[!.]* ~/.config/nvim/
+mv neovim-config nvim
+mv ~/Downloads/tmp/nvim/ ~/.config/
+
+export PATH="$HOME/neovim/bin:$PATH"
+
+echo "INSTALL SUCCESSFUL\n MAKE SURE TO ADD ~/neovim/bin to PATH"
+
+rm -rf ~/Downloads/tmp
+rm nvim.sh
